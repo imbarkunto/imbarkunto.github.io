@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamifikasi Data Raya dan Pemrograman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMIYQmGzYhZPh2RZJyJ3FZCbT4BEWyW8bMgL1nh" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+        :root {
+            --accent-color: #ff007f;
+            --gradient-color: #1e3a8a;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(-45deg, #1e3a8a 0%, #ff007f 100%);
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+        }
+        .sidebar {
+            position: fixed;
+            width: 240px;
+            left: -240px;
+            height: 100%;
+            background: rgba(30, 58, 138, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all .5s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .sidebar a {
+            display: block;
+            height: 50px;
+            width: 100%;
+            color: #fff;
+            line-height: 50px;
+            padding-left: 20px;
+            box-sizing: border-box;
+            border-left: 5px solid transparent;
+            transition: all .5s ease;
+        }
+        .sidebar a.active {
+            background: linear-gradient(to left, var(--accent-color), var(--gradient-color));
+            border-left: 5px solid var(--accent-color);
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        #check {
+            display: none;
+        }
+        label #btn, label #cancel {
+            position: absolute;
+            left: 5px;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 50%;
+            margin: 15px 30px;
+            background-color: rgba(30, 58, 138, 0.8);
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            line-height: 45px;
+            transition: all .5s ease;
+        }
+        label #btn::before {
+            content: '\f00d';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transform: rotate(0);
+            transition: transform 0.3s ease;
+        }
+        label #cancel::before {
+            content: '\f00d';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+        label #cancel {
+            opacity: 0;
+            visibility: hidden;
+        }
+        #check:checked ~ .sidebar {
+            left: 0;
+        }
+        #check:checked ~ label #btn {
+            margin-left: 245px;
+            opacity: 0;
+            visibility: hidden;
+        }
+        #check:checked ~ label #cancel {
+            margin-left: 245px;
+            opacity: 1;
+            visibility: visible;
+        }
+        .frame {
+            flex: 1;
+            width: calc(100vw - 250px);
+            height: 100vh;
+            margin: auto;
+            text-align: center;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px;
+            animation: fadeIn 1s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .home-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .home-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i id="btn"></i>
+        <i id="cancel"></i>
+    </label>
+     <div class="sidebar">
+        <a href="#" onclick="unloadContent();" class="active"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="./Prolog.pdf" target="game_frame"><i class="fas fa-book-open"></i><span>Prolog</span></a>
+        <a href="./level01/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 1</span></a>
+        <a href="./level02/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 2</span></a>
+        <a href="./level03/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 3</span></a>
+        <a href="./level04/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 4</span></a>
+        <a href="./level05/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 5</span></a>
+        <a href="./level06/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 6</span></a>
+        <a href="./level07/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 7</span></a>
+        <a href="./level08/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 8</span></a>
+        <a href="./level09/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 9</span></a>
+        <a href="./level10/story.html" target="game_frame"><i class="fas fa-gamepad"></i><span>Level 10</span></a>
+        <a href="./Ending.pdf" target="game_frame"><i class="fas fa-flag-checkered"></i><span>Ending</span></a>
+    </div>
+    <div class="frame">
+        <div id="home" class="home-content">
+            <h1>Gamifikasi Data Raya dan Pemrograman</h1>
+            <p>Pengembang: Kunto Imbar Nursetyo</p>
+            <p>Program Doktor Teknologi Pendidikan <br> Universitas Negeri Jakarta</p>
+            <p>&copy; 2024</p>
+        </div>
+        <iframe name="game_frame"></iframe>
+    </div>
+    <script>
+        function unloadContent() {
+            document.querySelector('#home').style.display = 'flex';
+            document.querySelector('iframe').style.display = 'none';
+        }
+        const links = document.querySelectorAll('.sidebar a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                links.forEach(el => el.classList.remove('active'));
+                link.classList.add('active');
+                if (link.getAttribute('href') !== '#') {
+                    document.querySelector('#home').style.display = 'none';
+                    document.querySelector('iframe').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
